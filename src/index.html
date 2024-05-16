@@ -77,7 +77,7 @@
             // Adding pixelation effect
             pixelPass = new ShaderPass(PixelShader);
             pixelPass.uniforms['resolution'].value = new THREE.Vector2(window.innerWidth, window.innerHeight);
-            pixelPass.uniforms['pixelSize'].value = 3; // Example pixel size
+            pixelPass.uniforms['pixelSize'].value = 2; // Example pixel size
             composer.addPass(pixelPass);
 
 
