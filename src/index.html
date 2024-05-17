@@ -111,7 +111,7 @@
             renderer.render(scene, camera);
 
             if (points) {
-                if (pointSize > 0.1 || pointSize < 0.05) grow = !grow;
+                if (pointSize > 0.15 || pointSize < 0.05) grow = !grow;
                 pointSize += grow ? 0.001 : -0.001;
                 points.material.size = pointSize;
 
