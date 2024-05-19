@@ -87,6 +87,89 @@
 
             createGridHelpers();
 
+            var img = new THREE.MeshBasicMaterial({ 
+                map:THREE.ImageUtils.loadTexture("coordinate2.png"),
+                transparent: true,
+                opacity: 0.9,
+            });
+            img.map.needsUpdate = true; //ADDED
+            img.transparent = true;
+
+            var img2 = new THREE.MeshBasicMaterial({ 
+                map:THREE.ImageUtils.loadTexture("coordinate1.png"),
+                transparent: true,
+                opacity: 0.9,
+                side: THREE.DoubleSide,
+                doubleSide: true,
+            });
+            img2.map.needsUpdate = true; //ADDED
+            img2.transparent = true;
+
+
+            const material = new THREE.LineBasicMaterial( { color: 0x000000 } );
+
+            const points = [];
+            points.push( new THREE.Vector3( -10, -4, -10 ) );
+            points.push( new THREE.Vector3( -10, 16, -10 ) );
+
+            const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+            const line = new THREE.Line( geometry, material );
+            scene.add( line );
+
+
+
+
+            const points4 = [];
+            points4.push( new THREE.Vector3( -10, -4, -10) );
+            points4.push( new THREE.Vector3(-10, -4, 10 ) );
+            const geometry4 = new THREE.BufferGeometry().setFromPoints( points4 );
+            const line4 = new THREE.Line( geometry4, material );
+            scene.add( line4 );
+
+
+
+
+            const points2 = [];
+            for (let i = 0; i <= 20; i++) {
+                points2.push( new THREE.Vector3( -9.5, -4+i, -10 ) );
+                points2.push( new THREE.Vector3( -10.5, -4+i, -10 ) );
+                const geometry = new THREE.BufferGeometry().setFromPoints( points2 );
+                scene.add( new THREE.Line( geometry, material ) );
+                points2.pop();
+                points2.pop();
+            }
+
+            const points3 = [];
+            for (let i = 0; i <= 20; i++) {
+                points3.push( new THREE.Vector3( -10.5, -4, -10+i ) );
+                points3.push( new THREE.Vector3( -9.5, -4, -10+i ) );
+                const geometry = new THREE.BufferGeometry().setFromPoints( points3 );
+                scene.add( new THREE.Line( geometry, material ) );
+                points3.pop();
+                points3.pop();
+            }
+
+
+
+            // plane
+            var plane = new THREE.Mesh(new THREE.PlaneGeometry(8, 4),img);
+            plane.overdraw = true;
+            plane.position.y = -4;
+            plane.position.x = 2;
+            plane.position.z = -10.5;
+            scene.add(plane);
+
+            var plane2 = new THREE.Mesh(new THREE.PlaneGeometry(8, 4),img2);
+            plane2.overdraw = true;
+            plane2.rotation.z = Math.PI/2;
+            plane2.rotation.x = -Math.PI/2;
+            plane2.position.y = -4.5;
+            plane2.position.x = -11.5;
+            plane2.position.z = -7;
+            scene.add(plane2);
+
+
             const loader = new OBJLoader();
             loader.load(
                 './Heart.obj',
